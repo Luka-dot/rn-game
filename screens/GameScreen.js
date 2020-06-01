@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, Text, StyleSheet, Button, Alert } from 'react-native';
 
 import NumberContainer from '../components/NumberContainer';
@@ -19,12 +19,23 @@ const GameScreen = props => {
     // passing userChoice in props to exclude this number to be picked on first try
     const [currentGuess, setCurrentGuess] = useState(generateRandomBetween(1, 100, props.userChoice));
 
+    // useRef value persist after component regenerate. this way we can save lowest and highest guess
+    const currentLow = useRef(1);
+    const currentHigh = userRef(100);
+
     const nextGuessHandler = direction => {
         if ((direction === 'lower' && currentGuess < props.userChoice) || (direction === 'greater' && currentGuess > props.userChoice)) {
             Alert.alert('Don\'t lie!!!', [{text: 'sorry!', style: 'cancel'}
         ]);
         return;
         }
+        if (direction === 'lower') {
+            currentHigh.current = currentGuess;
+        } else {
+            currentLow.current = currentGuess;
+        }
+        const nextNumber = generateRandomBetween(currentLow, currentHigh, currentGuess);
+        setCurrentGuess(nextNumber);
     };
 
     return (
