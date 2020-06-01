@@ -2,8 +2,11 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 const Card = props => {
-    return <View style={{...styles.card}}>{props.children}</View>
-},
+    // creating new flexible card styles with ability to assign styles from outside
+    // with ... creating new object by pulling all the styles from StyleSheet
+    // 2nd ... allows to merge all the styles from styles= (this way style can be passed from outside)
+    return <View style={{ ...styles.card, ...props.style }}>{props.children}</View>
+};
 
 const styles = StyleSheet.create({
     card: {    
