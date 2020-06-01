@@ -1,4 +1,5 @@
 export default {
     primary: '#f2787b',
-    accent: '#c717fc'
+    accent: '#c717fc',
+    textBold: 'indigo'
 }
