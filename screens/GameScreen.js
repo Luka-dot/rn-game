@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, Button, Alert } from 'react-native';
 
 import NumberContainer from '../components/NumberContainer';
@@ -22,6 +22,8 @@ const GameScreen = props => {
     // useRef value persist after component regenerate. this way we can save lowest and highest guess
     const currentLow = useRef(1);
     const currentHigh = useRef(100);
+    // useEffect hook -> runs after re-render cycle. therefore logics for winning number can be run with use of useEffect
+    useEffect
 
     const nextGuessHandler = direction => {
         if (
