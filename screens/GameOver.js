@@ -5,16 +5,28 @@ import NumberContainer from '../components/NumberContainer';
 import Card from '../components/Card';
 
 const GameOverScreen = props => {
-    return <View style={styles.screen} >
-        <Text>Game is over</Text>
-    </View>
+
+    return <View style={styles.main} > 
+            <Card style={styles.screen} >
+                <Text>Game is over</Text>
+                <Text>Number of Rounds: {props.roundsNumber}</Text>
+                <Text>Picked number was: {props.userNumber}</Text>
+                <Button title="NewGame" onPress={props.onRestart} />
+            </Card>
+           </View>
 };
 
 const styles = StyleSheet.create({
-    screen: {
+    main: {
         flex: 1,
-        justifyContent: 'center',
+        padding: 10,
         alignItems: 'center'
+    },
+    screen: {
+        alignItems: 'center',
+        marginTop: 20,
+        width: 300,
+        maxWidth: '80%'
     }
 });
 
