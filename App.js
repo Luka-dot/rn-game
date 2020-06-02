@@ -9,18 +9,18 @@ import GameScreen from './screens/GameScreen';
 import GameOverScreen from './screens/GameOver';
 
 const fetchFonts = () => {
-  Font.loadAsync({
+  return Font.loadAsync({
     'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
-    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf')
+    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
   });
 }
 
 export default function App() {
   const [userNumber, setUserNumber] = useState();
   const [guessRounds, setGuessRounds] = useState(0);
-  const [ dataLoaded, setDataLoaded] = useState(false);
+  const [dataLoaded, setDataLoaded] = useState(false);
 
-  if (!dataLoaded) {
+  if (dataLoaded !== true) {
     return <AppLoading startAsync={fetchFonts} onFinish={() => setDataLoaded(true)} />
   }
 

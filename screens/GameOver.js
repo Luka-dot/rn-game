@@ -1,16 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, StyleSheet, Button, Alert } from 'react-native';
+import { View, Text, StyleSheet, Button, Image } from 'react-native';
 
 import NumberContainer from '../components/NumberContainer';
 import Card from '../components/Card';
+import BodyText from '../components/BodyText';
+import TitleText from '../components/TitleText'
 
 const GameOverScreen = props => {
 
     return <View style={styles.main} > 
             <Card style={styles.screen} >
-                <Text>Game is over</Text>
-                <Text>Number of Rounds: {props.roundsNumber}</Text>
-                <Text>Picked number was: {props.userNumber}</Text>
+                <TitleText>Game is over</TitleText>
+                <Image source={require('../assets/success.png')} />
+                <BodyText>Number of Rounds: {props.roundsNumber}</BodyText>
+                <BodyText>Picked number was: {props.userNumber}</BodyText>
                 <Button title="NewGame" onPress={props.onRestart} />
             </Card>
            </View>
