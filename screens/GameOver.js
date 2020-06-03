@@ -40,10 +40,10 @@ const styles = StyleSheet.create({
         width: '80%',
         height: 300,
         borderRadius: 20,
-        borderWidth: 3,
+        borderWidth: 2,
         borderColor: 'black',
         overflow: 'hidden',
-        margin: 20
+        margin: 22
     },
     image: {
         width: '100%',
