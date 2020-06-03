@@ -17,6 +17,7 @@ const generateRandomBetween = (min, max, exclude) => {
         return rndNum;
     }
 };
+
 // FOR ScrollView set up
 // const renderListItem = (value, numOfRound) => (
 //     <View key={value} style={styles.listItem}>
@@ -117,8 +118,8 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '80%'
       },
-    // FlatList set up
-    list: {
+        // FlatList set up
+      list: {
         flexGrow: 1,
         // alignItems: 'center',
         justifyContent: 'flex-end',
