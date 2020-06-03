@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button, TouchableWithoutFeedback, Keyboard, Alert, Dimensions } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Button, TouchableWithoutFeedback, Keyboard, Alert, Dimensions, ScrollView, KeyboardAvoidingView } from 'react-native';
 
 import Card from '../components/Card';
 import Colors from '../constants/Colors';
@@ -14,6 +14,8 @@ const StartGameScreen = props => {
     const [enteredValue, setEnteredValue] = useState('');
     const [confirmed, setConfirmed] = useState(false);
     const [selectedNumber, setSelectedNumber] = useState();
+    // state to manage screen rotation and styling related to it
+    const [buttonWidth, setButtonWidth] = useState(Dimensions.get('window').width / 4);
 
     const numberInputHandler = inputText => {
         setEnteredValue(inputText.replace(/[^0-9]/g, ''))
@@ -34,6 +36,17 @@ const StartGameScreen = props => {
         setEnteredValue('');
         setSelectedNumber(chosenNumber);
     };
+    useEffect(() => {
+        const updateLayout = () => {
+            setButtonWidth(Dimensions.get('window').width / 4);
+        };
+    
+        Dimensions.addEventListener('change', updateLayout);
+        return () => {
+            // this is cleanOut function, to make sure only one event lister is active
+            Dimensions.removeEventListener('change', updateLayout)
+        };
+    });
 
     let confirmedOutput;
 
@@ -50,6 +63,8 @@ const StartGameScreen = props => {
     }
 
     return (
+        <ScrollView>
+        <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={30}>
         <TouchableWithoutFeedback onPress={() => {
             Keyboard.dismiss();
         }} >
@@ -67,10 +82,10 @@ const StartGameScreen = props => {
                             value={enteredValue}
                     />
                     <View style={styles.buttonContainer}>
-                        <View style={styles.button}>
+                        <View style={{width: buttonWidth}}>
                             <Button title="Reset" onPress={() => {resetInputHandler()}} color={Colors.accent} />
                         </View>
-                        <View style={styles.button}>
+                        <View style={{width: buttonWidth}}>
                             <Button title="Confirm" 
                                 onPress={confirmInputHandler} 
                                 color={Colors.primary} />
@@ -80,6 +95,8 @@ const StartGameScreen = props => {
                 {confirmedOutput}
             </View>
         </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
+        </ScrollView>
     )
 };
 
