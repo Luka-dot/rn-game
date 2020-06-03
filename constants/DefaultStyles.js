@@ -11,4 +11,5 @@ export default StyleSheet.create({
 });
 
 // this approach manages all styles in one file.
+// this is to be used in the components 
 // needs to be imported and then used <Text style={DefaultStyles.bodyText} ></Text>
