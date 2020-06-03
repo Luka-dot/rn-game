@@ -12,7 +12,8 @@ const GameOverScreen = props => {
                 <TitleText>Game is over</TitleText>
                 <View style={styles.imageContainer}>
                     <Image 
-                        source={require('../assets/success.png')} 
+                       // local Img source={require('../assets/success.png')} 
+                        source={{uri: 'https://cdn.pixabay.com/photo/2015/03/26/09/47/sky-690293_960_720.jpg'}}
                         style={styles.image} 
                         resizeMode="cover"
                     />
