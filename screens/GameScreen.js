@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, StyleSheet, Alert } from 'react-native';
+import { View, Text, StyleSheet, Alert, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import NumberContainer from '../components/NumberContainer';
@@ -33,7 +33,7 @@ const GameScreen = props => {
     // useEffect hook -> runs after re-render cycle. therefore logics for winning number can be run with use of useEffect
     useEffect(() => {
         if (currentGuess === userChoice) {
-            onGameOver(rounds);
+            onGameOver(pastGuesses.length);
         }
     }, [currentGuess, userChoice, onGameOver]);
 
@@ -49,7 +49,7 @@ const GameScreen = props => {
         if (direction === 'lower') {
             currentHigh.current = currentGuess;
         } else {
-            currentLow.current = currentGuess;
+            currentLow.current = currentGuess + 1;
         }
         const nextNumber = generateRandomBetween(currentLow.current, currentHigh.current, currentGuess);
         setCurrentGuess(nextNumber);
@@ -69,6 +69,9 @@ const GameScreen = props => {
                         <Ionicons name="md-add" size={24} color="white"/>
                     </MainButton>
                 </Card>
+                <ScrollView>
+                    {pastGuesses.map(guess => <View key={guess}><Text>{guess}</Text></View>)}
+                </ScrollView>
         </View>
     )
 };
