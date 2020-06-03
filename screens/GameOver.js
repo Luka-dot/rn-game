@@ -3,7 +3,9 @@ import { View, Text, StyleSheet, Button, Image } from 'react-native';
 
 import Card from '../components/Card';
 import BodyText from '../components/BodyText';
-import TitleText from '../components/TitleText'
+import TitleText from '../components/TitleText';
+import Colors from '../constants/Colors';
+import MainButton from '../components/MainButton';
 
 const GameOverScreen = props => {
 
@@ -12,15 +14,21 @@ const GameOverScreen = props => {
                 <TitleText>Game is over</TitleText>
                 <View style={styles.imageContainer}>
                     <Image 
-                       // local Img source={require('../assets/success.png')} 
-                        source={{uri: 'https://cdn.pixabay.com/photo/2015/03/26/09/47/sky-690293_960_720.jpg'}}
+                        source={require('../assets/success.png')} 
+                        // web link example  source={{uri: 'https://cdn.pixabay.com/photo/2015/03/26/09/47/sky-690293_960_720.jpg'}}
                         style={styles.image} 
                         resizeMode="cover"
                     />
                 </View>
-                <BodyText>Number of Rounds: {props.roundsNumber}</BodyText>
-                <BodyText>Picked number was: {props.userNumber}</BodyText>
-                <Button title="NewGame" onPress={props.onRestart} />
+                <View style={styles.resultContainer}>
+                    <BodyText style={styles.resultText}>
+                    Your phone needed{' '}
+                    <Text style={styles.highlight}>{props.roundsNumber}</Text> rounds to
+                    guess the number{' '}
+                    <Text style={styles.highlight}>{props.userNumber}</Text>.
+                    </BodyText>
+                </View>
+                <MainButton onPress={props.onRestart}>NEW GAME</MainButton>
             </Card>
            </View>
 };
@@ -39,7 +47,7 @@ const styles = StyleSheet.create({
     },
     imageContainer: {
         width: '80%',
-        height: 300,
+        height: '50%',
         borderRadius: 20,
         borderWidth: 2,
         borderColor: 'black',
@@ -49,7 +57,19 @@ const styles = StyleSheet.create({
     image: {
         width: '100%',
         height: '100%'
-    }
+    },
+    resultContainer: {
+        marginHorizontal: 30,
+        marginVertical: 15
+      },
+      resultText: {
+        textAlign: 'center',
+        fontSize: 20
+      },
+      highlight: {
+        color: Colors.primary,
+        fontFamily: 'open-sans-bold',
+      }
 });
 
 export default GameOverScreen;
