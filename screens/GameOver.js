@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, Button, Image } from 'react-native';
 
 import Card from '../components/Card';
