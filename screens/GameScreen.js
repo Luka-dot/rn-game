@@ -39,6 +39,8 @@ const GameScreen = props => {
     const initialGuess = generateRandomBetween(1, 100, props.userChoice);
     const [currentGuess, setCurrentGuess] = useState(initialGuess);
     const [pastGuesses, setPastGuesses] = useState([initialGuess]);
+    const [availableDeviceWidth, setAvailableDeviceWidth] = useState(Dimensions.get('window').width);
+    const [availableDeviceHeight, setAvailableDeviceHeight] = useState(Dimensions.get('window').height);
 
     // useRef value persist after component regenerate. this way we can save lowest and highest guess
     const currentLow = useRef(1);
@@ -46,6 +48,19 @@ const GameScreen = props => {
 
     // deconstructing to get props out and assign them to { userChoice, onGameOver }
     const { userChoice, onGameOver } = props;
+
+    useEffect (() => {
+        const updateLayout = () => {
+            setAvailableDeviceWidth(Dimensions.get('window').width);
+            setAvailableDeviceHeight(Dimensions.get('window').height);
+        };
+
+        Dimensions.addEventListener('change', updateLayout);
+
+        return () => {
+            Dimensions.removeEventListener('change', updateLayout);
+        };
+    });
 
     // useEffect hook -> runs after re-render cycle. therefore logics for winning number can be run with use of useEffect
     useEffect(() => {
@@ -73,6 +88,36 @@ const GameScreen = props => {
         // setRounds(curRounds => curRounds + 1);
         setPastGuesses(curPastGuess => [nextNumber, ...curPastGuess]);
     };
+
+    if (availableDeviceHeight < 500) {
+        return (
+            <View style={styles.screen}>
+            <Text>Opponent's Guess</Text>
+            <View style={styles.controls}>
+            <MainButton onPress={nextGuessHandler.bind(this, 'lower')}>
+                        <Ionicons name="md-remove" size={24} color="white"/>
+                    </MainButton>
+            <NumberContainer>{currentGuess}</NumberContainer>
+                    <MainButton onPress={nextGuessHandler.bind(this, 'greater')}>
+                        <Ionicons name="md-add" size={24} color="white"/>
+                    </MainButton>
+            </View>        
+                    
+                
+                    <View style={styles.listContainer}>
+                       {/* <ScrollView contentContainerStyle={styles.list}>
+                            {pastGuesses.map((guess, index) => (renderListItem(guess, pastGuesses.length - index)))}
+                        </ScrollView>  */}
+                        <FlatList
+                            keyExtractor={item => item}
+                            data={pastGuesses}
+                            renderItem={renderListItem.bind(this, pastGuesses.length)}
+                            contentContainerStyle={styles.list}
+                            />
+                    </View> 
+        </View>
+        )
+    }
 
     return (
         <View style={styles.screen}>
@@ -106,6 +151,12 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 10,
         alignItems: 'center'
+      },
+      controls: {
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          width: '80%',
+          alignItems: 'center'
       },
       buttonContainer: {
         flexDirection: 'row',

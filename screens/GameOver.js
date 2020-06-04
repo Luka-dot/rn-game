@@ -45,7 +45,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 20,
         width: 300,
-        maxWidth: '80%'
+        maxWidth: '80%',
+        paddingVertical: 10
     },
     imageContainer: {
         width: Dimensions.get('window').width * 0.55,
