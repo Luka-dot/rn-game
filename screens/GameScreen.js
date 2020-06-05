@@ -92,18 +92,16 @@ const GameScreen = props => {
     if (availableDeviceHeight < 500) {
         return (
             <View style={styles.screen}>
-            <Text>Opponent's Guess</Text>
-            <View style={styles.controls}>
-            <MainButton onPress={nextGuessHandler.bind(this, 'lower')}>
-                        <Ionicons name="md-remove" size={24} color="white"/>
-                    </MainButton>
-            <NumberContainer>{currentGuess}</NumberContainer>
-                    <MainButton onPress={nextGuessHandler.bind(this, 'greater')}>
-                        <Ionicons name="md-add" size={24} color="white"/>
-                    </MainButton>
-            </View>        
-                    
-                
+                <Text>Opponent's Guess</Text>
+                    <View style={styles.controls}>
+                        <MainButton onPress={nextGuessHandler.bind(this, 'lower')}>
+                            <Ionicons name="md-remove" size={24} color="white"/>
+                        </MainButton>
+                        <NumberContainer>{currentGuess}</NumberContainer>
+                        <MainButton onPress={nextGuessHandler.bind(this, 'greater')}>
+                            <Ionicons name="md-add" size={24} color="white"/>
+                        </MainButton>
+                    </View>        
                     <View style={styles.listContainer}>
                        {/* <ScrollView contentContainerStyle={styles.list}>
                             {pastGuesses.map((guess, index) => (renderListItem(guess, pastGuesses.length - index)))}
@@ -115,7 +113,7 @@ const GameScreen = props => {
                             contentContainerStyle={styles.list}
                             />
                     </View> 
-        </View>
+            </View>
         )
     }
 
@@ -170,6 +168,7 @@ const styles = StyleSheet.create({
         flex: 1,
         width: Dimensions.get('window').width > 350 ? '60%' : '80%', 
       },
+      
         // FlatList set up
       list: {
         flexGrow: 1,
@@ -204,6 +203,7 @@ const styles = StyleSheet.create({
     //     justifyContent: 'space-between',
     //     width: '60%'
     //   }
+
 });
 
 export default GameScreen;

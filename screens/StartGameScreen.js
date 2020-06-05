@@ -133,13 +133,13 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     chosenNumber: {
-        fontSize: 20,
+        fontSize: 21,
         fontWeight: 'bold',
         color: Colors.textBold,
         justifyContent: 'center'
     },
     summaryContainer: {
-        marginVertical: 20,
+        marginVertical: 21,
         alignItems: 'center'
     },
     text: {
