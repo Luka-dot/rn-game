@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button, Image, Dimensions, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Button, Image, Dimensions, ScrollView, SafeAreaView } from 'react-native';
 
 import Card from '../components/Card';
 import BodyText from '../components/BodyText';
@@ -9,31 +9,32 @@ import MainButton from '../components/MainButton';
 
 const GameOverScreen = props => {
 
-    return <ScrollView>
-            <View style={styles.main} > 
-                <Card style={styles.screen} >
-                    <TitleText>Game is over</TitleText>
-                    <View style={styles.imageContainer}>
-                        <Image 
-                            source={require('../assets/success.png')} 
-                            // web link example  source={{uri: 'https://cdn.pixabay.com/photo/2015/03/26/09/47/sky-690293_960_720.jpg'}}
-                            style={styles.image} 
-                            resizeMode="cover"
-                        />
-                    </View>
-                    <View style={styles.resultContainer}>
-                        <BodyText style={styles.resultText}>
-                        Your phone needed{' '}
-                        <Text style={styles.highlight}>{props.roundsNumber}</Text> rounds to
-                        guess the number{' '}
-                        <Text style={styles.highlight}>{props.userNumber}</Text>.
-                        </BodyText>
-                    </View>
-                    <MainButton onPress={props.onRestart}>NEW GAME</MainButton>
-                </Card>
-            </View>
-           </ScrollView>
-};
+    return (
+            <ScrollView>
+                <View style={styles.main} > 
+                    <Card style={styles.screen} >
+                        <TitleText>Game is over</TitleText>
+                        <View style={styles.imageContainer}>
+                            <Image 
+                                source={require('../assets/success.png')} 
+                                // web link example  source={{uri: 'https://cdn.pixabay.com/photo/2015/03/26/09/47/sky-690293_960_720.jpg'}}
+                                style={styles.image} 
+                                resizeMode="cover"
+                            />
+                        </View>
+                        <View style={styles.resultContainer}>
+                            <BodyText style={styles.resultText}>
+                            Your phone needed{' '}
+                            <Text style={styles.highlight}>{props.roundsNumber}</Text> rounds to
+                            guess the number{' '}
+                            <Text style={styles.highlight}>{props.userNumber}</Text>.
+                            </BodyText>
+                        </View>
+                        <MainButton onPress={props.onRestart}>NEW GAME</MainButton>
+                    </Card>
+                </View>
+            </ScrollView>    
+    )};
 
 const styles = StyleSheet.create({
     main: {
